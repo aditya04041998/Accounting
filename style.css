@@ -1,0 +1,8 @@
+p{
+    color:green;
+}
+@media only screen and (max-width:200px){
+    p{
+        color:#be3dcf;
+    }
+}
