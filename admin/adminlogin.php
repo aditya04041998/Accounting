@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
         if($result){
             session_start();
             $_SESSION['login']=$result[2];
+            $_SESSION['session']=$result[3];
             $_SESSION['account']=$result[0];
             // $_SESSION['accounts']="";
             $_SESSION['error']="";
@@ -37,7 +38,7 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Admin login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

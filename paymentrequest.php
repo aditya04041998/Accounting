@@ -34,7 +34,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inwards</title>
+    <title>Payment request</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -119,7 +119,7 @@
     <div class="container " style="font-size:14px;">
         
     <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-  <a class="navbar-brand" href="inwards.php">Accouinting</a>
+  <a class="navbar-brand" href="index.php"><strong>HISSAB</strong></a>
   <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
   </button>
@@ -130,7 +130,7 @@
         <a class="nav-link" href="inwards.php">Home <span class="sr-only">(current)</span></a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link active"  href="inwards.php">inwards</a>
+        <a class="nav-link active"  href="index.php">inwards</a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="outwards.php">outwards</a>
@@ -188,13 +188,13 @@
             </div>
         <div class="card my-3" style="border:none;box-shadow:0 0  5px grey;">
             <div class="card-header" style="background:#007bff;">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-6">
-                        <h6 class="text-white">Payment Request</h6>
+                <div class="row" >
+                    <div class="col-md-6 col-sm-6 col-5">
+                        <h6 class="text-white">Send Request</h6>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-6">
-                        <a href="inwards.php" style="background:#66cf3de8;" class=" btn btns btn-sm float-right">inwards</a>
-                         <a href="outwards.php" style="background:#ef6e14;" class="mr-2 btn btns btn-sm float-right">Outwards</a>
+                    <div class="col-md-6 col-sm-6 col-7 ">
+                        <a href="index.php" style="background:#66cf3de8;" class=" btn btns btn-sm float-right">inwards</a>
+                         <a href="outwards.php" style="background:#ef6e14;" class="mr-1 btn btns btn-sm float-right">Outwards</a>
                     </div>
                 </div>
             </div>
@@ -251,17 +251,9 @@
             </div>
         </div>
         <h5 class="text-danger mb-3" >Your Recent Payment History</h5>    
-        <div class="table table-responsive-md">
+        <div class="table table table-responsive-md table-responsive-lg" style="font-size:13px;">
             <table class="table table-bordered table-striped text-center" style="box-shadow:0 4px 5px 0 grey">
-                <thead class="text-white" style="background:#a56ab7;">
-                    <th>S.no</th>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Particulars</th>
-                    <th>Debit</th>
-                    <th>Current balance</th>
-                    <th>Status</th>
-                </thead>
+                
                 <?php 
                     $con=mysqli_connect('localhost','root','','accounting');
                    
@@ -278,9 +270,27 @@
                     }
                     $row_last=($page-1)*$limit;
                         $data=mysqli_query($con,"SELECT * FROM `paymentrequest` where user_id='$userId' ORDER BY id DESC LIMIT $row_last,$limit");
-                    $sno=0;
+                        $row=mysqli_num_rows($data);
+                        if($row){
+                            ?>
+                            <thead class="text-white" style="background:#a56ab7;">
+                            <th>S.no</th>
+                            <th style="min-width:120px;">Date</th>
+                            <th style="min-width:200px;">Name</th>
+                            <th style="min-width:300px;">Particulars</th>
+                            <th>Debit</th>
+                            <th>Status</th>
+                            </thead>
+                        <?php
+                        }else{
+                            ?> 
+                            <div class="alert alert-danger text-center mt-5">
+                                <span>No record found</span>
+                            </div>
+                            <?php
+                        }
                     while($row=mysqli_fetch_array($data)){
-                        $sno++;
+                        $row_last++;
                         if($row['status']==1){
                             $background="#b2ecc0";
                             $results="Success";
@@ -296,7 +306,7 @@
                         }
                         ?>
                         <tr style="background:<?php echo $background; ?>">
-                            <td><?php echo $sno;?></td>
+                            <td><?php echo $row_last;?></td>
                             <td><?php echo $row['date'];?></td>
                             <td><?php echo $row['name'];?></td>
                             <td>
@@ -304,7 +314,6 @@
                                 <span class="badge badge-pill badge-primary"><?php echo $row['remark'];?></span>
                             </td>
                             <td ><?php echo $row['debit'];?></td>
-                            <td ><?php echo $row['balance'];?></td>    
                             <td ><strong class="badge badge-pill <?php echo $badge; ?>"><?php echo $results;?></strong></td>   
                         </tr>
                     <?php

@@ -1,5 +1,5 @@
 <?php 
-     require 'PHPMailer/PHPMailerAutoload.php';
+     require '../PHPMailer/PHPMailerAutoload.php';
 
      $mail = new PHPMailer;
 
@@ -12,8 +12,8 @@
      $mail->Password = 'adityabunk';                           // SMTP password
      $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
      $mail->Port = 587;                                    // TCP port to connect to
-        $name="Welcom to reset password";
-     $mail->setFrom('aditya.kumar@bunkinfotech.in', 'HISSAB');
+        $name="Hi Aditya";
+     $mail->setFrom('aditya.kumar@bunkinfotech.in', 'Mailer');
      $mail->addAddress($email, $name);     // Add a recipient
 
      // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -1038,7 +1038,7 @@
                            class="sc-bdVaJa dggHpc" display="block" style="box-sizing: border-box; position: static; border-radius: 0; -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1); transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1); overflow: inherit; padding: 0rem 0rem 0rem 0rem; margin: 1.5rem 0rem 1.5rem 0rem; border-top: none; border-right: none; border-bottom: none; border-left: none; display: block;">Use the link below to set up a new password for your account. If you did not request
                              to reset your password, ignore this email and the link will expire on its own.</div>
                          </div>
-                         <a class="sc-jzJRlG hznfox" color="primary" type="button" href="http://localhost/accounting/setpassword.php?id='.$reset.'"
+                         <a class="sc-jzJRlG hznfox" color="primary" type="button" href="http://localhost/accounting/admin/setpassword.php?id='.$reset.'"
                          role="button" style="-webkit-backface-visibility: hidden; backface-visibility: hidden; background-color: #F96854; border: 2px solid #F96854; border-radius: 0; box-sizing: border-box; display: inline-block; font-weight: 700; padding: 1rem 1.5rem; position: relative; text-align: center; text-decoration: none; text-transform: uppercase; -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1); transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; white-space: inherit; cursor: pointer; color: #FFFFFF; font-size: 1rem;">
                            <div class="sc-fjdhpX ktKmOq" style="visibility: visible;">Set New Password</div>
                          </a>
@@ -1069,9 +1069,7 @@
        </body>
      
      </html>';
-     
-           
-     $mail->Subject = 'Password Reset';
+     $mail->Subject = 'Admin Password reset';
      $mail->Body    = $html;
     
 

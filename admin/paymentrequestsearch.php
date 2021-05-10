@@ -16,6 +16,7 @@
                             ?>
                              <thead class="text-white" style="background:#a56ab7;">
                                 <th>S.no</th>
+                                <th>Account</th>
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Particulars</th>
@@ -39,6 +40,7 @@
                             ?>
                             <tr style=background:#f6cacee1;>
                                 <td><?php echo $sno;?></td>
+                                <td><?php echo $row['user_id'];?></td>
                                 <td><?php echo $row['date'];?></td>
                                 <td><?php echo $row['name'];?></td>
                                 <td>
@@ -56,6 +58,7 @@
                             ?>
                             <tr style=background:#ee7e87be;>
                                 <td><?php echo $sno;?></td>
+                                <td><?php echo $row['user_id'];?></td>
                                 <td><?php echo $row['date'];?></td>
                                 <td><?php echo $row['name'];?></td>
                                 <td>
@@ -73,6 +76,7 @@
                             </div>
                             <tr style="background:#a9ebb8df">
                                 <td><?php echo $sno;?></td>
+                                <td><?php echo $row['user_id'];?></td>
                                 <td><?php echo $row['date'];?></td>
                                 <td><?php echo $row['name'];?></td>
                                 <td>

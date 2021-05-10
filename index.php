@@ -125,7 +125,7 @@
 <body>
     <div class="container " style="font-size:14px;">
         <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-  <a class="navbar-brand" href="inwards.php">Accouinting</a>
+  <a class="navbar-brand" href="index.php"><strong>HISSAB</strong></a>
   <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
   </button>
@@ -136,7 +136,7 @@
         <a class="nav-link" href="inwards.php">Home <span class="sr-only">(current)</span></a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link disabled" style="color:rgba(255, 255, 255, 0.678);" href="inwards.php">inwards</a>
+        <a class="nav-link disabled" style="color:rgba(255, 255, 255, 0.678);" href="index.php">inwards</a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="outwards.php">outwards</a>
@@ -309,7 +309,7 @@
                                 if($page==$total_page){ $one=0;}else{$one=1;}
                                 ?>
                                 <li class="page-item <?php if($one==0){echo "disabled";}?> ">
-                                    <a class="page-link " href="inwards.php?page=<?php echo $page+$one;?>"><?php echo "Next";?></a>
+                                    <a class="page-link " href="index.php?page=<?php echo $page+$one;?>"><?php echo "Next";?></a>
                                 </li> 
                             <?php
                             }
@@ -320,7 +320,7 @@
                                     if($i!=4){
                                         ?>
                                     <li class="page-item <?php if($page==$pages){ echo "disabled"; } ?>" >
-                                        <a class="page-link " style="<?php if($page==$pages){ echo "background:blue;color:white;"; } ?>" href="inwards.php?page=<?php echo $pages;?>"><?php echo $pages;?></a>
+                                        <a class="page-link " style="<?php if($page==$pages){ echo "background:blue;color:white;"; } ?>" href="index.php?page=<?php echo $pages;?>"><?php echo $pages;?></a>
                                     </li> 
                                     <?php
                                     $i++;
@@ -343,7 +343,7 @@
                                         if($page==1){ $one=0;}else{$one=1;}
                                         ?>
                                         <li class="page-item <?php if($page==1){echo "disabled";}?> ">
-                                            <a class="page-link " href="inwards.php?page=<?php echo $page-$one;?>"><?php echo "Previous";?></a>
+                                            <a class="page-link " href="index.php?page=<?php echo $page-$one;?>"><?php echo "Previous";?></a>
                                         </li> 
                                     <?php
                                     }
@@ -353,13 +353,13 @@
                                     if($total_page==$page){
                                         ?>
                                         <li class="page-item ">
-                                            <a class="page-link" href="inwards.php?page=<?php echo 1;?>"><?php echo ' First page';?></a>
+                                            <a class="page-link" href="index.php?page=<?php echo 1;?>"><?php echo ' First page';?></a>
                                         </li> 
                                         <?php
                                     }else{
                                         ?>
                                         <li class="page-item ">
-                                            <a class="page-link" href="inwards.php?page=<?php echo $total_page;?>"><?php echo $total_page.' Last page';?></a>
+                                            <a class="page-link" href="index.php?page=<?php echo $total_page;?>"><?php echo $total_page.' Last page';?></a>
                                         </li> 
                                         <?php
                                     }

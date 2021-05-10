@@ -4,7 +4,7 @@
 ?>
 
 
-<div class="table-responsiv-md">
+<div class="table table-responsive-md">
             <table class="table table-bordered text-center" style="box-shadow:0 4px 5px 0 grey">
          
 <?php
@@ -15,6 +15,7 @@ $rows=mysqli_num_rows($query);
         ?>
         <thead class="text-white" style="background:#a56ab7;">
             <th>S.no</th>
+            <th>Account</th>
             <th>Date</th>
             <th>Name</th>
             <th>Particulars</th>
@@ -38,6 +39,7 @@ $rows=mysqli_num_rows($query);
                             ?>
                             <tr style=background:#b2ecc0;>
                                 <td><?php echo $sno;?></td>
+                                <td><?php echo $row['user_id'];?></td>
                                 <td><?php echo $row['date'];?></td>
                                 <td><?php echo $row['name'];?></td>
                                 <td>
@@ -55,6 +57,7 @@ $rows=mysqli_num_rows($query);
                             </div>
                             <tr style="background:#f6cacee1">
                                 <td><?php echo $sno;?></td>
+                                <td><?php echo $row['user_id'];?></td>
                                 <td><?php echo $row['date'];?></td>
                                 <td><?php echo $row['name'];?></td>
                                 <td>

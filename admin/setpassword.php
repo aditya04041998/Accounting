@@ -1,22 +1,21 @@
 <?php 
  $error="";
 if(isset($_POST['submit'])){
-    $email=$_POST['user_name'];
-    $reset=str_shuffle('2345678');
+    $reset=$_GET['id'];
+    $password=$_POST['user_password'];
         $con=mysqli_connect('localhost','root','','accounting');
-        $query=mysqli_query($con,"SELECT * FROM `user` WHERE user_name='$email'");
+        $query=mysqli_query($con,"SELECT * FROM `admin_log` WHERE reset='$reset'");
        $result=mysqli_num_rows($query);
     //    echo $result;
        $res=mysqli_fetch_array($query);
-        $active=$res['active'];
+        // $active=$res['active'];
         if($result){
-            if($active=='a'){
-                $que=mysqli_query($con,"UPDATE `user` SET `reset`='$reset' WHERE user_name='$email'");
-                include('sendmail.php');
+            // if($active=='a'){
+                $que=mysqli_query($con,"UPDATE `admin_log` SET `password`='$password',`reset`='' WHERE reset='$reset'");
                 $error="success";
-            }else{
-                $error="block";
-            }
+            // }else{
+            //     $error="block";
+            // }
         }else{
             $error="error";
         }
@@ -42,7 +41,7 @@ if(isset($_POST['submit'])){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="validation.js"></script>
-
+</head>
 <style>
 *{
     font-size:14px;
@@ -56,49 +55,41 @@ body{
     align-items:center;
     justify-content:center;
 }
-input[type="text"]{
-    border:1px solid #80bdff96;
-}
 input[type="text"]:focus{
     box-shadow:none;
 }
-.btns {
-    background:#007bff;
-}
-.btns:focus{
-    border:none;
-    box-shadow:0 0 10px #007bff;
-}
-::placeholder{
-    font-size:14px;
+input[type="password"]:focus{
+    box-shadow:none;
 }
 .card{
     border-radius:10px;
     box-shadow:0 0 5px 0 rgba(128, 128, 128, 0.253);
 }
-
 </style>
-</head>
 <body>
     <div class="container" id="asd">
        <div class="card p-4 mt-4" style="height:auto;width:350px;">
-            <form action="" onsubmit="return myReset()" method="POST" enctype="multipart/form-data">
+            <form action="" onsubmit="return mySet()" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <h3 class="text-primary text-center">Reset Password</h3>
+                            <h3 class="text-info text-center">Set Password</h3>
                         </div>
                     <div class="form-group">
-                        <label for="">Email</label>
-                        <input  type="text" name="user_name" id="user_name" onkeyup="userReset()" placeholder="Enter email" class="form-control">
-                        <div id="name_error"></div>
+                        <label for="">Password</label>
+                        <input  type="text" name="user_password" id="user_password" onkeyup="userPasswords()" placeholder="Enter user name" class="form-control">
+                        <div id="password_error"></div>
                     </div>
                     <div class="form-group">
-                    <a  style="text-decoration:none;" href="login.php"><strong>Back to login</strong></a>
+                        <label for="">Conform Password</label>
+                        <input  type="password" name="user_conform" id="user_conform" onkeyup="userConform()" placeholder="Enter user name" class="form-control">
+                        <div id="conform_error"></div>
+                    </div>
+                    <div class="form-group">
                         <?php 
                             if($error == "success"){
                                 ?>
                                     <div class="alert alert-success alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong class="text-success">Success!</strong>&nbsp; Reset link has been sent on your email.
+                                        <strong class="text-success">Success!</strong>&nbsp; Password has been reset successfuly.
                                     </div>
                                 <?php
                             }
@@ -114,14 +105,14 @@ input[type="text"]:focus{
                                 ?>
                                     <div class="alert alert-danger alert-dismissible">
                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong class="text-danger">Not Found!</strong>&nbsp;We didn't get any account with this email.
+                                        <strong class="text-danger">Error!</strong>&nbsp;Expired your reset token.
                                     </div>
                                 <?php
                             }
                         ?>
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" value="Reset" name="submit" class="btn btns btn-block text-white">
+                        <input type="submit" value="Reset" name="submit" class="btn btn-block btn-primary">
                     </div>
                 </form>
        </div>

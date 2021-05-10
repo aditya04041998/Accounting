@@ -196,7 +196,7 @@
     <div class="container " style="font-size:14px;">
        
     <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-  <a class="navbar-brand" href="inwards.php">Accouinting</a>
+  <a class="navbar-brand" href="index.php"><strong>HISSAB</strong></a>
   <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
   </button>
@@ -207,7 +207,7 @@
         <a class="nav-link" href="inwards.php">Home <span class="sr-only">(current)</span></a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link active"  href="inwards.php">inwards</a>
+        <a class="nav-link active"  href="index.php">inwards</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" style="color:rgba(255, 255, 255, 0.678);" href="outwards.php">outwards</a>
@@ -271,7 +271,7 @@
                         <h6 class="text-white">Outwards</h6>
                     </div>
                     <div class="col-md-6 col-sm-6 col-6">
-                         <a href="inwards.php" style="background:#4b97f0;" class="btn btns btn-sm float-right">Inwards</a>
+                         <a href="index.php" style="background:#4b97f0;" class="btn btns btn-sm float-right">Inwards</a>
                     </div>
                 </div>
             </div>

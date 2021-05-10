@@ -1,7 +1,7 @@
 <?php  
         session_start();
         // $_SESSION['accounts']="";
-        if(!$_SESSION['login']){
+        if(!$_SESSION['session']){
             header('Location: adminlogin.php');
         }
        
@@ -94,7 +94,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="validation.js"></script>
+    <script src="../validation.js"></script>
     <style>
     /* dashboard start */
     body{
@@ -168,12 +168,21 @@
     box-shadow:none;
     border:1px solid #007bff;
 }
+.btns{
+    box-shadow:none;
+    background:#0069d9;
+}
+.btns:focus{
+    box-shadow:0 0 5px 1px #0069d991;
+    background:#0069d9;
+    border-radius:5px;
+}
     </style>
 </head>
 <body>
     <div class="container">
          <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-            <a class="navbar-brand" href="adminhistory.php">Admin</a>
+            <a class="navbar-brand" href="adminhistory.php"><strong>HISSAB</strong>&nbsp;Admin</a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
             </button>
@@ -249,19 +258,22 @@
              <?php 
                if($account==""){
                 ?>
-                    <div class="row">
-                        <div class="col-md-6 col-12">
-                            <h5 class="text-danger my-3" style="margin-top:-7px;">All users records</h5>
-                        </div>
-                        <div class="col-md-6 col-12 ">
-                            <div class="form-inline float-right">
-                                <form action="" method="POST">
+                    <div class="row ">
+                <div class="col-md-6 col-12" >
+                    <h5 class="text-danger my-3" style="margin-top:-7px;">All transection history</h5>
+                </div>
+                <div class="col-md-6 col-12" >
+                            <form action="" method="POST">
+                            <div class="input-group mt-1 mb-2">
+                            
                                 <input type="text" class="form-control" name="searchInput" id="searchInput" placeholder="Serach by userid">
-                                <button type="button" onclick="searchFun()" class="btn btn-sm btn-primary"><i style="padding:6px;" class=" fa fa-search"></i></button>
-                                </form>
+                                <div class="input-group-btn">
+                                     <button type="button" onclick="searchFun()" style="margin-top:1px;" class="form-control btn btn-sm btns"><i  class="text-white fa fa-search"></i></button>                      
+                                </div>
                             </div>
-                        </div>
-                    </div>   
+                            </form>
+                </div>
+            </div> 
                 <?php
                }else{
                 $qer=mysqli_query($con,"SELECT * FROM `user` where user_id='$account'");
@@ -277,7 +289,7 @@
                <div id="fetch_data">
                
                
-        <div class="table-responsiv-md">
+        <div class="table table-responsive-md table-responsive-lg" style="font-size:13px;">
             <table class="table table-bordered text-center" style="box-shadow:0 4px 5px 0 grey">
                 
                 <?php 
@@ -316,9 +328,10 @@
                         ?>
                         <thead class="text-white" style="background:#a56ab7;">
                             <th>S.no</th>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Particulars</th>
+                            <th>Account</th>
+                            <th style="min-width:120px;">Date</th>
+                            <th style="min-width:200px;">Name</th>
+                            <th style="min-width:300px;">Particulars</th>
                             <th>Debit</th>
                             <th>Credit</th>
                             <th>Balance</th>
@@ -326,18 +339,19 @@
                     <?php
                     }else{
                         ?> 
-                        <div class="alert alert-danger text-center">
+                        <div class="alert alert-danger text-center mt-4">
                             <span>No record found</span>
                         </div>
                         <?php
                     }
-                    $sno=0; 
+                     
                     while($row=mysqli_fetch_array($data)){
-                        $sno++;
+                        $row_last++;
                        if($row['credit']!=""){
                         ?>                
                         <tr style=background:#b2ecc0;>
-                            <td><?php echo $sno; ?></td>
+                            <td><?php echo $row_last; ?></td>
+                            <td><?php echo $row['user_id'];?></td>
                             <td><?php echo $row['date'];?></td>
                             <td><?php echo $row['name'];?></td>
                             <td>
@@ -354,7 +368,8 @@
                         ?>
                         </div>
                         <tr style="background:#f6cacee1;">
-                            <td><?php echo $sno; ?></td>
+                            <td><?php echo $row_last; ?></td>
+                            <td><?php echo $row['user_id'];?></td>
                             <td><?php echo $row['date'];?></td>
                             <td><?php echo $row['name'];?></td>
                             <td>

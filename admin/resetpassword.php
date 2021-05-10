@@ -4,19 +4,17 @@ if(isset($_POST['submit'])){
     $email=$_POST['user_name'];
     $reset=str_shuffle('2345678');
         $con=mysqli_connect('localhost','root','','accounting');
-        $query=mysqli_query($con,"SELECT * FROM `user` WHERE user_name='$email'");
+        $query=mysqli_query($con,"SELECT * FROM `admin_log` WHERE email='$email'");
        $result=mysqli_num_rows($query);
     //    echo $result;
-       $res=mysqli_fetch_array($query);
-        $active=$res['active'];
+    //    $res=mysqli_fetch_array($query);
+    //     $active=$res['active'];
         if($result){
-            if($active=='a'){
-                $que=mysqli_query($con,"UPDATE `user` SET `reset`='$reset' WHERE user_name='$email'");
+    
+                $que=mysqli_query($con,"UPDATE `admin_log` SET `reset`='$reset' WHERE email='$email'");
                 include('sendmail.php');
                 $error="success";
-            }else{
-                $error="block";
-            }
+           
         }else{
             $error="error";
         }
@@ -92,7 +90,7 @@ input[type="text"]:focus{
                         <div id="name_error"></div>
                     </div>
                     <div class="form-group">
-                    <a  style="text-decoration:none;" href="login.php"><strong>Back to login</strong></a>
+                    <a  style="text-decoration:none;" href="adminlogin.php"><strong>Back to admin login</strong></a>
                         <?php 
                             if($error == "success"){
                                 ?>

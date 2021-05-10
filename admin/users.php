@@ -1,26 +1,26 @@
 <?php
     session_start();
-    if(!$_SESSION['login']){
+    if(!$_SESSION['session']){
         header('Location: adminlogin.php');
     }
       $con=mysqli_connect('localhost','root','','accounting');
-      if(isset($_GET['id'])){
-        $id=$_GET['id'];
-        $query=mysqli_query($con,"SELECT * FROM `user` where user_id=$id");
-        // $res=mysqli_num_rows($query);
-        $res=mysqli_fetch_array($query);
-       if( $res['active']=='a'){
-        $data=mysqli_query($con,"UPDATE `user` SET `active`='b' WHERE user_id=$id"); 
-        header('Location: users.php');
-        $error="active";
-       }
-       if( $res['active']=='b'){
-        $data=mysqli_query($con,"UPDATE `user` SET `active`='a' WHERE user_id=$id");
-        header('Location: users.php');
-        $error="block";
-       }
+    // //   if(isset($_GET['id'])){
+    // //     $id=$_GET['id'];
+    //     $query=mysqli_query($con,"SELECT * FROM `user`");
+    //     // $res=mysqli_num_rows($query);
+    //     $res=mysqli_fetch_array($query);
+    //    if( $res['active']=='a'){
+    //     $data=mysqli_query($con,"UPDATE `user` SET `active`='b' WHERE user_id=$id"); 
+    //     // header('Location: users.php');
+    //     $error="active";
+    //    }
+    //    if( $res['active']=='b'){
+    //     $data=mysqli_query($con,"UPDATE `user` SET `active`='a' WHERE user_id=$id");
+    //     // header('Location: users.php');
+    //     $error="block";
+    //    }
           
-    }
+    // // }
     $error="";
     $val=""; 
     if(isset($_POST['submit'])){
@@ -88,7 +88,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="validation.js"></script>
+    <script src="../validation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
     /* dashboard start */
     body{
@@ -195,6 +196,22 @@
             font-size:28px;
             color:#563d7c;
         }
+        .bt{
+    box-shadow:none;
+    background:#28a745;
+        }
+        .bt:focus{
+            box-shadow:0 0 5px 1px #28a74698;
+            background:#28a745;
+        }
+        .bts{
+    box-shadow:none;
+    background:#dc3545;
+        }
+        .bts:focus{
+            box-shadow:0 0 5px 1px #dc35469a;
+            background:#dc3545;
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -212,7 +229,7 @@
     
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-            <a class="navbar-brand" href="adminhistory.php">Admin</a>
+            <a class="navbar-brand" href="adminhistory.php"><strong>HISSAB</strong>&nbsp;Admin</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -233,7 +250,7 @@
                     <a class="nav-link text-white" href="acceptpayrequest.php">PaymentRequest</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="logout.php">Logout</a>
+                    <a class="nav-link text-white" href="adminlogout.php">Logout</a>
                 </li>
                 
                 </ul>
@@ -326,15 +343,7 @@
             </div>
         <div class="table table-responsive-md">
             <table class="table table-bordered table-striped text-center" style="box-shadow:0 4px 5px 0 grey">
-                <thead class="text-white" style="background:#a56ab7;">
-                    <th>Id</th>
-                    <th>Account Id</th>
-                    <th>Status</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Change Status</th>
-                    
-                </thead>
+               
                 <?php 
                     $con=mysqli_connect('localhost','root','','accounting');
                     $query=mysqli_query($con,"SELECT * FROM `user`");
@@ -348,7 +357,25 @@
                     }
                     $row_last=($page-1)*$limit;
                     $data=mysqli_query($con,"SELECT * FROM `user` LIMIT $row_last,$limit");
-                    
+                     $row=mysqli_num_rows($data);
+                            if($row){
+                                ?>
+                                <thead class="text-white" style="background:#a56ab7;">
+                                    <th>Id</th>
+                                    <th>Account Id</th>
+                                    <th>Status</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Change Status</th>
+                                </thead>
+                            <?php
+                            }else{
+                                ?> 
+                                <div class="alert alert-danger text-center mt-4">
+                                    <span>No record found</span>
+                                </div>
+                                <?php
+                            }
                     while($row=mysqli_fetch_array($data)){
                         $row_last++;
                         ?>
@@ -380,13 +407,16 @@
                                         
                                         if($row['active']=='a'){
                                             ?>
-                                             <a href="users.php?id=<?php echo $row['user_id'];?>" class="btn btn-sm  btn-danger">Block</a>
+                                    
+                                             <button type="button" onclick="onBlock(<?php echo $row['user_id'];?>)" class="text-white btn btn-sm  bts">Block</button>
+                                          
                                             <?php
                                         }
                                         if($row['active']=='b'){
                                             ?>
-                                             <a href="users.php?id=<?php echo $row['user_id'];?>" class="btn btn-sm btn-success">Active</a>
                                             
+                                            <button type="button" onclick="onActive(<?php echo $row['user_id'];?>)" class="text-white btn btn-sm  bt ">Active</button>
+                                          
                                             <?php
                                         }
                                     ?>
@@ -473,6 +503,81 @@
                     <div class="text-center text-white" >
                         <h5 class="text-white p-2" style="background:#563d7c;border-radius:5px;"><span>HISAAB | BIPL</span></h5>     
                     </div>
+    
     </div>
+    <script>
+     function onActive(account){
+        swal({
+            title: "Are you sure?",
+            text: "You want to activate this account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                type:"POST",
+               url:"userActive.php",
+               data:{
+                   account:account,
+                   active:'a',
+               },
+                success: function (data) {
+                    if(data=='a'){
+                        swal("Success! You have activated this account!", {
+                            icon: "success",
+                            }).then(
+                                function(){
+                            // location.reload(true);
+                            window.location.href="users.php";
+                           }
+                            );
+                    }
+                },
+               
+            });
+            } else {
+                swal("Please active the account!");
+            }
+            });
+    }
+    function onBlock(account){
+        swal({
+            title: "Are you sure?",
+            text: "You want to block this account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                type:"POST",
+               url:"userActive.php",
+               data:{
+                   account:account,
+                   active:'b',
+               },
+                success: function (data) {
+                    if(data=='b'){
+                        swal("Success! You have blocked this account!", {
+                            icon: "success",
+                            }).then(
+                                function(){
+                            // location.reload(true);
+                            window.location.href="users.php";
+                           }
+                            );
+                    }
+                },
+               
+            });
+            } else {
+                swal("Please block the account!");
+            }
+            });
+    }
+    </script>
 </body>
 </html>

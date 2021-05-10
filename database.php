@@ -74,7 +74,10 @@
                     while($re=mysqli_fetch_array($data)){
                        $payment=$re['sum(debit)'];
                     }  
-                    
+                    $datas=mysqli_query($con,"SELECT * FROM `admin_log` ");
+                    while($d=mysqli_fetch_array($datas)){
+                        $emails=$d['email'];
+                    }
                     if($balance>=$payment+$amount){
                         $payment;
                         $total=$balance-($payment+$amount);
@@ -82,7 +85,7 @@
                         if($re['reference']==$reference){
                             $reference=str_shuffle('123456789');
                         }else{
-                            $query="INSERT INTO `paymentrequest`(`email`,`user_id`, `title`, `credit`, `debit`, `date`, `file`, `payment_mode`,`remark`,`name`,`balance`,`status`,`reference`) VALUES ('aditya@gmail.com','$account','$title','','$amount','$date','$file','$payment_mode','$remark','$name','$total','0','$reference')";
+                            $query="INSERT INTO `paymentrequest`(`email`,`user_id`, `title`, `credit`, `debit`, `date`, `file`, `payment_mode`,`remark`,`name`,`balance`,`status`,`reference`) VALUES ('$emails','$account','$title','','$amount','$date','$file','$payment_mode','$remark','$name','$total','0','$reference')";
                             $result=mysqli_query($con,$query);
                             $error="success";
                         }

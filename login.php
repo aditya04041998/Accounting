@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
             $_SESSION['login']=$result[2];
             $_SESSION['name']=$result[1];
             $_SESSION['account']=$result[0];
-            header("Location: inwards.php");
+            header("Location: index.php");
         }else{
             $error= "Password/User Id is wrong!";
         }
