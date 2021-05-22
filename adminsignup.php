@@ -1,5 +1,6 @@
 <?php
 $error=""; 
+
 if(isset($_POST['submit'])){
     $name=$_POST['user_names'];
     $email=$_POST['user_name'];
