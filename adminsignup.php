@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
     $phone=$_POST['user_phone'];
     $password=$_POST['user_password'];
     $date=date("y/m/d");
-        $con=mysqli_connect('localhost','root','','accounting');
+         include('databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `admin_log` WHERE email='$email'");
         $result=mysqli_fetch_row($query);
         if(!$result){

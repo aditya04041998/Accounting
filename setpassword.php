@@ -3,7 +3,7 @@
 if(isset($_POST['submit'])){
     $reset=$_GET['id'];
     $password=$_POST['user_password'];
-        $con=mysqli_connect('localhost','root','','accounting');
+      include('databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `user` WHERE reset='$reset'");
        $result=mysqli_num_rows($query);
     //    echo $result;

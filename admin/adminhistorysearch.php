@@ -1,5 +1,5 @@
 <?php
- $con=mysqli_connect('localhost','root','','accounting');
+  include('../databaseConnect.php');
     $inputData=$_POST['inputData'];
 ?>
 

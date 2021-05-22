@@ -1,5 +1,5 @@
 <?php
- $con=mysqli_connect('localhost','root','','accounting');
+  include('../databaseConnect.php');
     $account=$_POST['account'];
     $id=$_POST['id'];
     $reference=$_POST['reference'];

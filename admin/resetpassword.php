@@ -3,7 +3,7 @@
 if(isset($_POST['submit'])){
     $email=$_POST['user_name'];
     $reset=str_shuffle('2345678');
-        $con=mysqli_connect('localhost','root','','accounting');
+         include('../databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `admin_log` WHERE email='$email'");
        $result=mysqli_num_rows($query);
     //    echo $result;
@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="validation.js"></script>
+    <script src="../validation.js"></script>
 
 <style>
 *{

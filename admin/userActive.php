@@ -1,5 +1,5 @@
 <?php
- $con=mysqli_connect('localhost','root','','accounting');
+ include('../databaseConnect.php');
     $account=$_POST['account'];
     $active=$_POST['active'];
     $query=mysqli_query($con,"SELECT * from `user` where user_id='$account' ");

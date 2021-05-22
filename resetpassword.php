@@ -3,7 +3,7 @@
 if(isset($_POST['submit'])){
     $email=$_POST['user_name'];
     $reset=str_shuffle('2345678');
-        $con=mysqli_connect('localhost','root','','accounting');
+    include('databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `user` WHERE user_name='$email'");
        $result=mysqli_num_rows($query);
     //    echo $result;

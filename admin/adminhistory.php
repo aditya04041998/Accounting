@@ -7,7 +7,7 @@
       $account=$_SESSION['login'];
         
        
-        $con=mysqli_connect('localhost','root','','accounting');
+      include('../databaseConnect.php');
          $datas=mysqli_query($con,"SELECT SUM(debit),SUM(credit),balance FROM `adminhistory` ");
          while($r=mysqli_fetch_array($datas)){
            $debit=$r['SUM(debit)'];
@@ -121,7 +121,7 @@
 <body>
     <div class="container">
          <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-            <a class="navbar-brand" href="adminhistory.php"><strong>HISSAB</strong>&nbsp;Admin</a>
+            <a class="navbar-brand" href="adminhistory.php"><strong>HISAAB</strong>&nbsp;Admin</a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
             </button>
@@ -195,7 +195,7 @@
             <div class="table table-responsive-md table-responsive-lg" style="font-size:13px;">
                 <table class="table table-bordered text-center" style="box-shadow:0 4px 5px 0 grey">
                     <?php 
-                        $con=mysqli_connect('localhost','root','','accounting');
+                        include('../databaseConnect.php');
                     
                             $query=mysqli_query($con,"SELECT * FROM `adminhistory`");
                         $limit=20;

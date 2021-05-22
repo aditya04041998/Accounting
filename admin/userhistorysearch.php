@@ -1,5 +1,5 @@
 <?php
- $con=mysqli_connect('localhost','root','','accounting');
+  include('../databaseConnect.php');
     $inputData=$_POST['inputData'];
 ?>
 
@@ -11,7 +11,7 @@
             <table class="table table-bordered text-center" style="box-shadow:0 4px 5px 0 grey">
                 
                 <?php 
-                    $con=mysqli_connect('localhost','root','','accounting');
+                     include('../databaseConnect.php');
                     $query=mysqli_query($con,"SELECT * FROM `data` where user_id='$inputData' ORDER BY id DESC");
                    
         

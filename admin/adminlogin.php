@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
     $password=$_POST['user_password'];
   
     
-        $con=mysqli_connect('localhost','root','','accounting');
+       include('../databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `admin_log` WHERE email='$name' && password='$password'");
        $result=mysqli_fetch_row($query);
         if($result){
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="validation.js"></script>
+    <script src="../validation.js"></script>
 
 <style>
 body{
@@ -106,13 +106,26 @@ input[type="password"]:focus{
                         <div id="password_error"></div>
                     </div>
                    
-                    <div class="form-group d-flex justify-content-between">
-                        <div><a href="resetpassword.php"><strong>Forgot password</strong></a></div>
+                    <div class="form-group">
+                        <!-- <div><a href="resetpassword.php"><strong>Forgot password</strong></a></div> -->
                         <!-- <div><a href="adminsignup.php"><strong>Signup</strong></a></div> -->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a  style="text-decoration:none;" href="resetpassword.php"><strong>Forgot password</strong></a><br>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a  style="text-decoration:none;" href="../login.php"><strong>User Login</strong></a><br>
+                            </div>
+                        </div>
+                       <div class="text-center mt-1">
+                            <span id="error"class="text-danger"><strong><?php echo $error; ?></strong></span>
+                       </div>
+
                     </div>
-                   <div class="form-group text-center" id="error">
+                   <!-- <div class="form-group text-center" id="error">
                    <span class="text-danger"><strong ><?php echo $error;?></strong></span>
-                   </div>
+                   </div> -->
                     <div class="form-group text-center">
                         <input type="submit" value="Login" name="submit" class="btn text-white btns btn-block">
                     </div>

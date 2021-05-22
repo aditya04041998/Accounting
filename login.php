@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
     $password=$_POST['user_password'];
   
     
-        $con=mysqli_connect('localhost','root','','accounting');
+       include('databaseConnect.php');
         $query=mysqli_query($con,"SELECT * FROM `user` WHERE user_name='$name' && password='$password'");
        $result=mysqli_fetch_row($query);
         if($result){
@@ -95,9 +95,18 @@ input[type="password"]:focus{
                         <div id="password_error"></div>
                     </div>
                     <div class="form-group">
-                        <a  style="text-decoration:none;" href="resetpassword.php"><strong>Forgot password</strong></a>
-                        <span id="error"class="text-danger"><strong><?php echo $error; ?></strong></span>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a  style="text-decoration:none;" href="resetpassword.php"><strong>Forgot password</strong></a><br>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a  style="text-decoration:none;" href="admin/adminlogin.php"><strong>Admin Login</strong></a><br>
+                            </div>
+                        </div>
+                       <div class="text-center mt-1">
+                            <span id="error"class="text-danger"><strong><?php echo $error; ?></strong></span>
+                       </div>
+                      </div>
                     <div class="form-group text-center">
                         <input type="submit" value="Login" name="submit" class="btn text-white btns btn-block">
                     </div>

@@ -17,7 +17,7 @@
         $login=$_SESSION['login'];
             $dir="uploads/".$file;
             move_uploaded_file($tmp,$dir);
-            $con=mysqli_connect('localhost','root','','accounting');
+            include('databaseConnect.php');
                 $query=mysqli_query($con,"SELECT * FROM `user` where user_name='$login'");
                 while($r=mysqli_fetch_array($query)){
                     $balance=$r['balance'];
@@ -66,7 +66,7 @@
         
 
     }
-    $con=mysqli_connect('localhost','root','','accounting');
+    include('databaseConnect.php');
     $login=$_SESSION['login'];
     $userId=$_SESSION['account'];
        // $success=$_SESSION['success'];
@@ -196,7 +196,7 @@
     <div class="container " style="font-size:14px;">
        
     <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-  <a class="navbar-brand" href="index.php"><strong>HISSAB</strong></a>
+  <a class="navbar-brand" href="index.php"><strong>HISAAB</strong></a>
   <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
   </button>

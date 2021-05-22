@@ -3,7 +3,7 @@
     if(!$_SESSION['session']){
         header('Location: adminlogin.php');
     }
-      $con=mysqli_connect('localhost','root','','accounting');
+    include('../databaseConnect.php');
     // //   if(isset($_GET['id'])){
     // //     $id=$_GET['id'];
     //     $query=mysqli_query($con,"SELECT * FROM `user`");
@@ -33,7 +33,7 @@
         if($balance==""){
             $balance=0;
         }
-            $con=mysqli_connect('localhost','root','','accounting');
+        include('../databaseConnect.php');
             $query=mysqli_query($con,"SELECT * FROM `user` WHERE user_name='$email'");
             $result=mysqli_fetch_row($query);
             if(!$result){
@@ -229,7 +229,7 @@
     
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-            <a class="navbar-brand" href="adminhistory.php"><strong>HISSAB</strong>&nbsp;Admin</a>
+            <a class="navbar-brand" href="adminhistory.php"><strong>HISAAB</strong>&nbsp;Admin</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -345,7 +345,7 @@
             <table class="table table-bordered table-striped text-center" style="box-shadow:0 4px 5px 0 grey">
                
                 <?php 
-                    $con=mysqli_connect('localhost','root','','accounting');
+                     include('../databaseConnect.php');
                     $query=mysqli_query($con,"SELECT * FROM `user`");
                     $limit=20;
                     $total_row=mysqli_num_rows($query);

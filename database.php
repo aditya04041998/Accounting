@@ -15,7 +15,7 @@
         $login=$_SESSION['login'];
             $dir="uploads/".$file;
             move_uploaded_file($tmp,$dir);
-            $con=mysqli_connect('localhost','root','','accounting');
+            include('databaseConnect.php');
                 $query=mysqli_query($con,"SELECT * FROM `user` where user_name='$login'");
                 while($r=mysqli_fetch_array($query)){
                     $balance=$r['balance'];
@@ -62,7 +62,7 @@
         $login=$_SESSION['login'];
             $dir="uploads/".$file;
             move_uploaded_file($tmp,$dir);
-            $con=mysqli_connect('localhost','root','','accounting');
+            include('databaseConnect.php');
                 $query=mysqli_query($con,"SELECT * FROM `user` where user_name='$login'");
                 while($r=mysqli_fetch_array($query)){
                     $balance=$r['balance'];

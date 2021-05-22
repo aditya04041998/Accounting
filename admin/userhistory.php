@@ -40,7 +40,7 @@
            } 
        
        if($account==""){
-        $con=mysqli_connect('localhost','root','','accounting');
+        include('../databaseConnect.php');
         $datas=mysqli_query($con,"SELECT SUM(debit),SUM(credit),balance FROM `data` ");
         while($r=mysqli_fetch_array($datas)){
           $debit=$r['SUM(debit)'];
@@ -53,7 +53,7 @@
            // print_r($total);
         }
        }else{
-        $con=mysqli_connect('localhost','root','','accounting');
+        include('../databaseConnect.php');
         $datas=mysqli_query($con,"SELECT SUM(debit),SUM(credit),balance FROM `data` where user_id='$account'");
         while($r=mysqli_fetch_array($datas)){
           $debit=$r['SUM(debit)'];
@@ -182,7 +182,7 @@
 <body>
     <div class="container">
          <nav class="navbar navbar-expand-lg navbar-dark " style="background:#563d7c;border-radius:4px;">
-            <a class="navbar-brand" href="adminhistory.php"><strong>HISSAB</strong>&nbsp;Admin</a>
+            <a class="navbar-brand" href="adminhistory.php"><strong>HISAAB</strong>&nbsp;Admin</a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
             </button>
